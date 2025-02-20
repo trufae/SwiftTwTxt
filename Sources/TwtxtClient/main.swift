@@ -8,7 +8,10 @@ NSApp.setActivationPolicy(.regular)
 let appDelegate = AppDelegate()
 NSApp.delegate = appDelegate
 NSApp.run()
+
 /*
+
+   // cli entrypoint
 import Foundation
 import SwiftUI
 // Asynchronous entry point using `Task` in a standalone Swift script

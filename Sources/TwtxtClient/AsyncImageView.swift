@@ -35,29 +35,3 @@ struct AsyncImageView: View {
         .clipShape(Circle())
     }
 }
-/*
-
-struct AsyncImageView: View {
-    let url: URL?
-    
-    var body: some View {
-        Group {
-            if let url = url {
-                AsyncImage(url: url) { phase in
-                    if let image = phase.image {
-                        image.resizable()
-                    } else if phase.error != nil {
-                        Color.red // Show error indicator
-                    } else {
-                        ProgressView()
-                    }
-                }
-            } else {
-                Color.gray // Placeholder when no URL
-            }
-        }
-        .frame(width: 40, height: 40)
-        .clipShape(Circle())
-    }
-}
-*/

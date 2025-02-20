@@ -15,12 +15,6 @@ struct User : Identifiable, Codable {
         self.avatar = avatar
         self.description = description
     }
-/*
-    var nick: String
-    var url: URL
-    var avatar: URL?
-    var description: String?
-*/
     var id = UUID() // Ensures each user has a unique identifier
     var nick: String
     var url: URL
@@ -55,12 +49,8 @@ func parseTwtxtFile(from content: String, url: URL) throws -> (User, [Post]) {
                 case "nick":
                     user.nick = components[1]
                 case "avatar":
-			    /*
-                    user.avatar = URL(string: components[1])
-			    case "avatar":
-			    */
-    user.avatar = URL(string: components[1].trimmingCharacters(in: .whitespaces))
-	    print(user.avatar);
+                    user.avatar = URL(string: components[1].trimmingCharacters(in: .whitespaces))
+                    print(user.avatar);
                 case "description":
                     user.description = components[1]
                 default:
@@ -71,19 +61,19 @@ func parseTwtxtFile(from content: String, url: URL) throws -> (User, [Post]) {
             let components = line.split(separator: "\t", maxSplits: 1).map { String($0) }
             if components.count == 2 {
                 let timestamp = components[0]
-                var date: Date? = isoFormatter.date(from: timestamp)
+                    var date: Date? = isoFormatter.date(from: timestamp)
 
-                // Use fallback formatters if ISO 8601 parsing fails
-                if date == nil {
-                    date = fallbackFormatter.date(from: timestamp)
-                }
+                    // Use fallback formatters if ISO 8601 parsing fails
+                    if date == nil {
+                        date = fallbackFormatter.date(from: timestamp)
+                    }
                 if date == nil {
                     date = utcFormatter.date(from: timestamp)
                 }
 
                 if let date = date {
                     let post = Post(timestamp: date, message: components[1])
-                    posts.append(post)
+                        posts.append(post)
                 } else {
                     print("⚠️ Failed to parse date: \(timestamp)")
                 }
