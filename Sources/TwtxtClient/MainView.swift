@@ -10,8 +10,13 @@ struct MainView: View {
                 HStack {
                     if let avatarURL = account.avatar {
                         AsyncImageView(url: avatarURL)
+				.frame(width:40, height: 40)
+                                .clipShape(Circle())
                         Text(account.nick)
                     } else {
+                        AsyncImageView(url: URL(string:"https://www.radare.org/avatar.png"))
+				.frame(width:40, height: 40)
+                                .clipShape(Circle())
                         // AsyncImageView(url: URL("https://www.radare.org/avatar.png"))
                         Text("⚠️  \(account.nick)")
                         // Text("⚠️ No Avatar")

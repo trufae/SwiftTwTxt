@@ -9,6 +9,7 @@ struct TimelineView: View {
             HStack(alignment: .top, spacing: 10) {
                 AsyncImageView(url: user.avatar) // Show avatar
                     .frame(width: 40, height: 40)
+                                .clipShape(Circle())
 		    VStack(alignment: .leading) {
     Text(user.nick)
         .font(.headline)

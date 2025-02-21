@@ -50,8 +50,8 @@ func parseTwtxtFile(from content: String, url: URL) throws -> (User, [Post]) {
                 case "nick":
                     user.nick = components[1]
                 case "avatar":
-                    user.avatar = URL(string: components[1].trimmingCharacters(in: .whitespaces))
-                    print(user.avatar);
+                    let img = components[1].trimmingCharacters(in: .whitespaces)
+                    user.avatar = URL(string: img)
                 case "description":
                     user.description = components[1]
                 default:
