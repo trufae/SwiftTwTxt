@@ -1,6 +1,6 @@
 all:
 	swift build
-	swift run TwtxtClient
+	swift run YarnTwix
 
 allclean:
 	swift build --clean
@@ -9,8 +9,9 @@ clean:
 	rm -rf .build
 
 dist: clean
-	rm -rf SwiftTwTxt
-	git clone . SwiftTwTxt
-	rm -rf SwiftTwTxt/.git
-	rm -f SwiftTwTxt.zip
-	zip -r SwiftTwTxt.zip SwiftTwTxt
+	rm -rf YarnTwix
+	git clone . YarnTwix
+	rm -rf YarnTwix/.git
+	rm -f YarnTwix.zip
+	zip -r YarnTwix.zip YarnTwix
+	rm -rf YarnTwix
