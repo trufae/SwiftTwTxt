@@ -31,7 +31,7 @@ struct MainView: View {
                 }
             }
             .frame(minWidth: 150)
-            .navigationTitle("Twtxt")
+            .navigationTitle("YarnTwix")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {

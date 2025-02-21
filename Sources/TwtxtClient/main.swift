@@ -16,7 +16,7 @@ import SwiftUI
             styleMask: [.titled, .closable, .resizable, .miniaturizable],
             backing: .buffered, defer: false)
         window.center()
-        window.title = "Twtxt" // Set window title
+        window.title = "YarnTwix"
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
 
