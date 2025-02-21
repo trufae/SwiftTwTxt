@@ -10,15 +10,15 @@ struct MainView: View {
                 HStack {
                     if let avatarURL = account.avatar {
                         AsyncImageView(url: avatarURL)
-				.frame(width:40, height: 40)
-                                .clipShape(Circle())
+                            .frame(width:40, height: 40)
+                            .clipShape(Circle())
                         Text(account.nick)
                     } else {
                         AsyncImageView(url: URL(string:"https://www.radare.org/avatar.png"))
-				.frame(width:40, height: 40)
-                                .clipShape(Circle())
+                            .frame(width:40, height: 40)
+                            .clipShape(Circle())
                         // AsyncImageView(url: URL("https://www.radare.org/avatar.png"))
-                        Text("⚠️  \(account.nick)")
+                        Text("\(account.nick)")
                         // Text("⚠️ No Avatar")
                     }
                 }
@@ -30,19 +30,24 @@ struct MainView: View {
                     }
                 }
             }
-            .frame(minWidth: 250)
-                .toolbar {
+            .frame(minWidth: 150)
+            .navigationTitle("Twtxt")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                            viewModel.showAddAccountDialog = true
-                      }) {
-                        Image(systemName: "plus")
-                    }
-                    Button(action: {
-                            viewModel.showNewPostDialog = true
-                      }) {
-                        Image(systemName: "document.fill")
+                       viewModel.showAddAccountDialog = true
+                    }) {
+                       Image(systemName: "plus")
                     }
                 }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                       viewModel.showNewPostDialog = true
+                    }) {
+                       Image(systemName: "document.fill")
+                    }
+                }
+            }
 
             if let selectedAccount = selectedAccount {
                 TimelineView(posts: viewModel.posts, user: selectedAccount)
@@ -51,6 +56,9 @@ struct MainView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.gray.opacity(0.1))
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .newPost)) { _ in
+            viewModel.showNewPostDialog = true
         }
         .sheet(isPresented: $viewModel.showNewPostDialog) {
             ShowNewPostView(viewModel: viewModel)

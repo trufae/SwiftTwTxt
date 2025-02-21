@@ -9,30 +9,21 @@ struct TimelineView: View {
             HStack(alignment: .top, spacing: 10) {
                 AsyncImageView(url: user.avatar) // Show avatar
                     .frame(width: 40, height: 40)
-                                .clipShape(Circle())
-		    VStack(alignment: .leading) {
-    Text(user.nick)
-        .font(.headline)
-    Text(post.message)
-        .font(.body)
-        .foregroundColor(.primary)
-    ForEach(post.images, id: \.self) { imageUrl in
-        if let url = URL(string: imageUrl) {
-            AsyncImageView(url: url)
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: .infinity)
-        }
-    }
-}
-/*
+                    .clipShape(Circle())
                 VStack(alignment: .leading) {
                     Text(user.nick)
                         .font(.headline)
                     Text(post.message)
                         .font(.body)
                         .foregroundColor(.primary)
+                    ForEach(post.images, id: \.self) { imageUrl in
+                        if let url = URL(string: imageUrl) {
+                            AsyncImageView(url: url)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
                 }
-		*/
             }
             .padding(.vertical, 4)
         }
