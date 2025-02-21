@@ -1,7 +1,5 @@
 import SwiftUI
 
-import SwiftUI
-
 struct TimelineView: View {
     let posts: [Post]
     let user: User
@@ -11,7 +9,21 @@ struct TimelineView: View {
             HStack(alignment: .top, spacing: 10) {
                 AsyncImageView(url: user.avatar) // Show avatar
                     .frame(width: 40, height: 40)
-
+		    VStack(alignment: .leading) {
+    Text(user.nick)
+        .font(.headline)
+    Text(post.message)
+        .font(.body)
+        .foregroundColor(.primary)
+    ForEach(post.images, id: \.self) { imageUrl in
+        if let url = URL(string: imageUrl) {
+            AsyncImageView(url: url)
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity)
+        }
+    }
+}
+/*
                 VStack(alignment: .leading) {
                     Text(user.nick)
                         .font(.headline)
@@ -19,6 +31,7 @@ struct TimelineView: View {
                         .font(.body)
                         .foregroundColor(.primary)
                 }
+		*/
             }
             .padding(.vertical, 4)
         }

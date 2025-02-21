@@ -5,6 +5,7 @@ class TwtxtViewModel: ObservableObject {
     @Published var accounts: [User] = []
     @Published var posts: [Post] = []
     @Published var showAddAccountDialog = false
+    @Published var showNewPostDialog = false
     init() {
         if let url = URL(string: "https://www.radare.org/tw.txt") {
             addAccount(name: "radare", url: url)

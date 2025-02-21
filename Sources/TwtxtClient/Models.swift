@@ -4,6 +4,7 @@ struct Post: Identifiable {
     let id = UUID()
     let timestamp: Date
     let message: String
+    let images: [String]
 }
 
 struct User : Identifiable, Codable {
@@ -71,12 +72,32 @@ func parseTwtxtFile(from content: String, url: URL) throws -> (User, [Post]) {
                     date = utcFormatter.date(from: timestamp)
                 }
 
+		if let date = date {
+    var message = components[1]
+    var images = [String]()
+    let pattern = "!\\[[^\\]]*\\]\\(([^)]+)\\)"
+    if let regex = try? NSRegularExpression(pattern: pattern) {
+        let range = NSRange(message.startIndex..., in: message)
+        let matches = regex.matches(in: message, range: range)
+        for match in matches {
+            if let imageRange = Range(match.range(at: 1), in: message) {
+                images.append(String(message[imageRange]))
+            }
+        }
+        message = regex.stringByReplacingMatches(in: message, range: range, withTemplate: "")
+    }
+    let post = Post(timestamp: date, message: message, images: images)
+    posts.append(post)
+}
+/*
+
                 if let date = date {
                     let post = Post(timestamp: date, message: components[1])
                         posts.append(post)
                 } else {
                     print("⚠️ Failed to parse date: \(timestamp)")
                 }
+		*/
             }
         }
     }

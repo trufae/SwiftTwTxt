@@ -6,10 +6,14 @@ struct AddAccountView: View {
     @State private var url: String = ""
 
     var body: some View {
-        Form {
-            TextField("Name", text: $name)
-            TextField("URL", text: $url)
-        }
+        VStack(alignment: .leading, spacing: 15) {
+            Form {
+                TextField("Name", text: $name)
+    		    .textFieldStyle(RoundedBorderTextFieldStyle())
+                TextField("URL", text: $url)
+    		    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+        }.padding()
         .navigationTitle("Follow User")
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
